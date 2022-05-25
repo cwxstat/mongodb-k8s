@@ -1,0 +1,36 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: client
+spec:
+  selector:
+    matchLabels:
+      app: client-select
+  template:
+    metadata:
+      labels:
+        app: client-select
+    spec:
+      containers:
+        - name: client
+          image: us-central1-docker.pkg.dev/mchirico/k8s/client
+          
+          env:
+          - name: MONGO_URI
+            valueFrom:
+              secretKeyRef:
+                name: mongo-creds
+                key: mongouri
+
+          volumeMounts:
+            - name: certs
+              mountPath: /etc/mongo/certs
+              readOnly: true
+      volumes:
+        - name: certs
+          secret:
+            secretName: mongocerts
+            optional: false
+#
+# kubectl create secret generic mongocerts --from-file=certs
+#      
