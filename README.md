@@ -3,7 +3,7 @@
 
 
 # Generate Certs
-## Step 1
+### Step 1
 
 Generate keys.  The steps are all done in a docker container.
 
@@ -40,7 +40,7 @@ cp /tmp/mong* ./certs/.
 exit
 ```
 
-# Step 2
+### Step 2
 
 Mongodb requires a merged key. But first you may
 
