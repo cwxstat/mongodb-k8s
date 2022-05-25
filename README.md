@@ -1,7 +1,9 @@
 # mongodb-k8s
 ## MongoDB on Kubernetes
 
-# Step 1
+
+# Generate Certs
+## Step 1
 
 Generate keys.  The steps are all done in a docker container.
 
@@ -41,6 +43,8 @@ exit
 # Step 2
 
 Mongodb requires a merged key. But first you may
+
+
 need to correct the ownership
 
 ```bash
@@ -48,6 +52,14 @@ need to correct the ownership
 # Here I'm using codespaces, may need to use your own account.
 chown -R codespace.codespace ./certs
 
-
-
 ```
+
+
+## Kubernetes Secrets
+
+```bash
+kubectl create secret generic mongocerts --from-file=certs
+```
+
+
+
